@@ -4,27 +4,30 @@ $p-font: 'Roboto', sans-serif;
 $h-font: 'Roboto', sans-serif;
 $primary-bg-color: #4b3335;
 $primary-text-color: rgba(255, 255, 255, 0.85);
-$secondary-bg-color: rgba(255, 255, 255, 0.85);
-$secondary-h-color: #8a0916;
+$secondary-bg-color: rgba(238, 214, 214, 0.3);
+$secondary-h-color: #a80818;
 $secondary-p-color: #4b3335;
 $font-size-h: 2em;
 $font-size-p: 1em;
 
 * {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 h1 {
   font-size: $font-size-h;
+  font-family: $h-font;
 }
 
 h3 {
   font-size: ($font-size-h + $font-size-p)/2;
+  font-family: $h-font;
 }
 
 p {
   font-size: $font-size-p;
+  font-family: $p-font;
 }
 
 a {
@@ -32,4 +35,26 @@ a {
   text-decoration: none;
 }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.primary {
+  background-color: $primary-bg-color;
+  color: $primary-text-color
+}
+
+.secondary {
+  background-color: $secondary-bg-color;
+  color: $secondary-p-color;
+
+  h1, h3 {
+    color: $secondary-h-color
+  }
+}
+
+@import './assets/styles/navbar';
+@import './assets/styles/header';
+@import './assets/styles/main';
