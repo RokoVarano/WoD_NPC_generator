@@ -8,7 +8,7 @@ export default function main() {
   const leftInfo = article('', infoContent(['Name', 'Player', 'Chronicle']));
   const midInfo = article('', infoContent(['Nature', 'Demeanor', 'Concept']));
   const rightInfo = article('', infoContent(['Age', 'Sex', 'Residence']));
-  const generalInfo = section('', [leftInfo, midInfo, rightInfo]);
+  const generalInfo = section('General Info', [leftInfo, midInfo, rightInfo]);
 
   const leftAttr = article('Physical', attributesContent(['Strength', 'Dexterity', 'Stamina']));
   const midAttr = article('Social', attributesContent(['Charisma', 'Manipulation', 'Appearence']));
@@ -20,6 +20,7 @@ export default function main() {
   main.appendChild(form);
   form.appendChild(generalInfo);
   form.appendChild(attrInfo);
+
   // form.appendChild(attributes);
 
   return main;
@@ -47,6 +48,7 @@ const section = (title, articles) => {
 
 const article = (title, content) => {
   const article = d.createElement('article');
+  article.classList.add('secondary');
   if (title !== '') {
     article.id = title;
     const p = d.createElement('p');
@@ -63,7 +65,6 @@ const article = (title, content) => {
 
 const infoContent = (infos) => {
   const ul = d.createElement('ul');
-  console.log(infos);
 
   infos.map((info) => ul.appendChild(nameWidget(info)));
 
@@ -72,7 +73,6 @@ const infoContent = (infos) => {
 
 const attributesContent = (infos) => {
   const ul = d.createElement('ul');
-  console.log(infos);
 
   infos.map((info) => ul.appendChild(attrWidget(info)));
 
@@ -123,15 +123,28 @@ const attrWidget = (title) => {
 };
 
 const widgetDot = (title, value) => {
-  const dot = d.createElement('input');
-  dot.type = 'radio';
+  const dot = d.createElement('i');
+  dot.classList.add('far', 'fa-circle');
   dot.name = title;
   dot.value = value;
-  dot.addEventListener('click', () => changeDotColor(title, value));
+
+  dot.addEventListener('click', () => {
+    const children = [...dot.parentNode.children];
+
+    children.map(
+        (child) => changeDotColor(child, dot.value),
+    );
+  });
 
   return dot;
 };
 
-const changeDotColor = (title, value) => {
-
-}
+const changeDotColor = (child, value) => {
+  if (child.value <= value) {
+    child.classList.remove('far');
+    child.classList.add('fas');
+  } else {
+    child.classList.remove('fas');
+    child.classList.add('far');
+  }
+};

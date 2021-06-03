@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 $p-font: 'Roboto', sans-serif;
 $h-font: 'Roboto', sans-serif;
@@ -7,8 +8,8 @@ $primary-text-color: rgba(255, 255, 255, 0.85);
 $secondary-bg-color: rgba(238, 214, 214, 0.3);
 $secondary-h-color: #a80818;
 $secondary-p-color: #4b3335;
-$font-size-h: 2em;
-$font-size-p: 1em;
+$font-size-h: 2rem;
+$font-size-p: 1rem;
 
 * {
   margin: 0;

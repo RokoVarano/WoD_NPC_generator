@@ -17,8 +17,8 @@ main {
       .article-container {    
         
         article {
-          border: 1px red solid;
-          padding: 1em;
+          border: 1px $primary-bg-color solid;
+          padding: 0.5em;
 
           ul {
             list-style-type: none;
@@ -34,12 +34,12 @@ main {
               }
               
               input {
-                width: -webkit-fill-available;
                 padding: 0.5em;
               }
 
               .radio-container {
                 display: flex;
+                justify-content: space-between;
                 width: 60%;
 
                 input {
@@ -61,6 +61,8 @@ main {
     font-size: 100%;
     form {
       section {
+        width: 50%;
+
         .article-container {
           display: flex;
 
@@ -69,9 +71,16 @@ main {
 
             ul {
               li {
+                input {
+                  padding: 0;
+                  margin-left: 0.5em;
+                  width: 8rem;
+                }
+
                 .radio-container {
                   input {
                     height: 1em;
+                    margin-left: 0.5em;
                   }
                 }
               }
