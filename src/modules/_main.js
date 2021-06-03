@@ -4,6 +4,12 @@ const d = document;
 export default function main() {
   const main = d.createElement('main');
   const form = d.createElement('form');
+  const leftSide = d.createElement('div');
+  leftSide.classList.add('side');
+  const rightSide = d.createElement('div');
+  rightSide.classList.add('side');
+  form.appendChild(leftSide);
+  form.appendChild(rightSide);
 
   const leftInfo = article('', infoContent(['Name', 'Player', 'Chronicle']));
   const midInfo = article('', infoContent(['Nature', 'Demeanor', 'Concept']));
@@ -15,11 +21,43 @@ export default function main() {
   const rightAttr = article('Mental', attributesContent(['Perception', 'Intelligence', 'Wits']));
   const attrInfo = section('Attributes', [leftAttr, midAttr, rightAttr]);
 
+  const leftAbb = article('Talents',
+      attributesContent([
+        'Alertness', 'Athletics', 'Brawl',
+        'Dodge', 'Empathy', 'Expression',
+        'Intimidation', 'Leadership', 'Streetwise',
+        'Subterfuge',
+      ],
+      ),
+  );
+  const midAbb = article('Skills',
+      attributesContent([
+        'Animal Ken', 'Crafts', 'Drive',
+        'Etiquette', 'Firearms', 'Melee',
+        'Performance', 'Security', 'Stealth',
+        'Survival',
+      ],
+      ),
+  );
+  const rightAbb = article('Knowledges',
+      attributesContent([
+        'Academics', 'Computer', 'Finance',
+        'Investigation', 'Law', 'Linguistics',
+        'Medicine', 'Occult', 'Politics',
+        'Science',
+      ],
+      ),
+  );
+  const abbInfo = section('Abilities', [leftAbb, midAbb, rightAbb]);
+
   // const attributes = section('attributes');
 
   main.appendChild(form);
-  form.appendChild(generalInfo);
-  form.appendChild(attrInfo);
+  form.appendChild(leftSide);
+  form.appendChild(rightSide);
+  leftSide.appendChild(generalInfo);
+  leftSide.appendChild(attrInfo);
+  leftSide.appendChild(abbInfo);
 
   // form.appendChild(attributes);
 
