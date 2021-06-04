@@ -48,9 +48,42 @@ export default function main() {
       ],
       ),
   );
+
   const abbInfo = section('Abilities', [leftAbb, midAbb, rightAbb]);
 
-  // const attributes = section('attributes');
+  const bgArticle = article('Backgrounds',
+      attributesContent([
+        'Allies', 'Contacts', 'Fame',
+        'Influence', 'Mentor', 'Resources',
+        'Status', '', '',
+      ],
+      ),
+  );
+
+  const numinaArticle = article('Numina',
+      attributesContent([
+        'Sorcery', 'Psychic', 'Theurgy',
+        'Blood Affinity', 'Disciplines', 'Garou Gifts',
+        'True Faith', '', '',
+      ],
+      ),
+  );
+
+  const virtuesArticle = article('',
+      virtuesContent([
+        'Conscience', 'Self Control', 'Courage',
+      ],
+      ['Humanity', 'WillPower'],
+      ),
+  );
+
+  const advantagesInfo = section('Advantages', [bgArticle, numinaArticle, virtuesArticle]);
+
+  const meritsArticle = article('Merits/Flaws', meritsContent());
+
+  const descriptionArticle = article('Description', descriptionContent());
+
+  const quirksInfo = section('', [meritsArticle, descriptionArticle]);
 
   main.appendChild(form);
   form.appendChild(leftSide);
@@ -58,6 +91,8 @@ export default function main() {
   leftSide.appendChild(generalInfo);
   leftSide.appendChild(attrInfo);
   leftSide.appendChild(abbInfo);
+  rightSide.appendChild(advantagesInfo);
+  rightSide.appendChild(quirksInfo);
 
   // form.appendChild(attributes);
 
@@ -117,6 +152,47 @@ const attributesContent = (infos) => {
   return ul;
 };
 
+const virtuesContent = (infos, souls) => {
+  const ul = d.createElement('ul');
+  const virtuesp = d.createElement('p');
+  virtuesp.textContent = 'Virtues';
+  ul.appendChild(virtuesp);
+
+  infos.map((info) => ul.appendChild(attrWidget(info)));
+
+  const soulp = d.createElement('p');
+  soulp.textContent = 'Soul';
+  soulp.id = 'soulp';
+  soulp.style.borderTop = '';
+  ul.appendChild(soulp);
+
+  souls.map((soul) => ul.appendChild(soulWidget(soul)));
+
+  return ul;
+};
+
+const meritsContent = () => {
+  const ul = d.createElement('ul');
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  ul.appendChild(meritsWidget());
+  return ul;
+};
+
+const descriptionContent = () => {
+  const ul = d.createElement('ul');
+  ul.style.display
+
+  ul.appendChild(descriptionWidget());
+
+  return ul;
+};
+
 // small Widgets
 
 
@@ -141,10 +217,20 @@ const nameWidget = (title) => {
 const attrWidget = (title) => {
   const li = d.createElement('li');
 
-  const label = d.createElement('label');
-  label.for = title;
-  label.textContent = title;
-  li.appendChild(label);
+  if (title === '') {
+    const inputText = d.createElement('input');
+    inputText.type = 'text';
+    inputText.id = title;
+    inputText.name = title;
+    inputText.classList.add('input-label');
+
+    li.appendChild(inputText);
+  } else {
+    const label = d.createElement('label');
+    label.for = title;
+    label.textContent = title;
+    li.appendChild(label);
+  }
 
   const radioContainer = d.createElement('div');
   radioContainer.classList.add('radio-container');
@@ -159,6 +245,109 @@ const attrWidget = (title) => {
 
   return li;
 };
+
+const soulWidget = (title) => {
+  const li = d.createElement('li');
+  li.classList.add('virtueWidgetLi');
+
+  if (title === '') {
+    const inputText = d.createElement('input');
+    inputText.type = 'text';
+    inputText.id = title;
+    inputText.name = title;
+    inputText.classList.add('input-label');
+
+    li.appendChild(inputText);
+  } else {
+    const label = d.createElement('label');
+    label.for = title;
+    label.textContent = title;
+    li.appendChild(label);
+  }
+
+  const radioContainer = d.createElement('div');
+  radioContainer.classList.add('radio-container-soul');
+
+  const permanentline = d.createElement('div');
+  permanentline.classList.add('dot-line');
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 1));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 2));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 3));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 4));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 5));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 6));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 7));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 8));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 9));
+  permanentline.appendChild(widgetDot(`${title}-permanent`, 10));
+
+  const templine = d.createElement('div');
+  templine.classList.add('dot-line');
+  templine.appendChild(widgetDot(`${title}-temp`, 1));
+  templine.appendChild(widgetDot(`${title}-temp`, 2));
+  templine.appendChild(widgetDot(`${title}-temp`, 3));
+  templine.appendChild(widgetDot(`${title}-temp`, 4));
+  templine.appendChild(widgetDot(`${title}-temp`, 5));
+  templine.appendChild(widgetDot(`${title}-temp`, 6));
+  templine.appendChild(widgetDot(`${title}-temp`, 7));
+  templine.appendChild(widgetDot(`${title}-temp`, 8));
+  templine.appendChild(widgetDot(`${title}-temp`, 9));
+  templine.appendChild(widgetDot(`${title}-temp`, 10));
+
+  radioContainer.appendChild(permanentline);
+  radioContainer.appendChild(templine);
+
+  li.appendChild(radioContainer);
+
+  return li;
+};
+
+const meritsWidget = () => {
+  const li = d.createElement('li');
+
+  const inputText = d.createElement('input');
+  inputText.type = 'text';
+  inputText.classList.add('input-label');
+
+  li.appendChild(inputText);
+
+  const selectType = d.createElement('select');
+  const options = ['Physical', 'Mental', 'Social', 'Supernatural'];
+  options.map((optionName) => {
+    const option = d.createElement('option');
+    option.value = optionName;
+    option.textContent = optionName;
+
+    selectType.appendChild(option);
+  });
+
+  li.appendChild(selectType);
+
+  const selectValue = d.createElement('select');
+  const numbers = [-7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7];
+  numbers.map((optionName) => {
+    const option = d.createElement('option');
+    option.value = optionName;
+    option.textContent = optionName;
+
+    selectValue.appendChild(option);
+  });
+
+  li.appendChild(selectValue);
+
+  return li;
+};
+
+const descriptionWidget = () => {
+  const li = d.createElement('li');
+  const textArea = d.createElement('textarea');
+  textArea.name = 'description';
+  li.appendChild(textArea);
+
+  return li;
+};
+
+// widget componenents
 
 const widgetDot = (title, value) => {
   const dot = d.createElement('i');
