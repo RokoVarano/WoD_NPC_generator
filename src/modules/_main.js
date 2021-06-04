@@ -61,12 +61,7 @@ export default function main() {
   );
 
   const numinaArticle = article('Numina',
-      attributesContent([
-        'Sorcery', 'Psychic', 'Theurgy',
-        'Blood Affinity', 'Disciplines', 'Garou Gifts',
-        'True Faith', '', '',
-      ],
-      ),
+      numinaContent(),
   );
 
   const virtuesArticle = article('',
@@ -152,6 +147,30 @@ const attributesContent = (infos) => {
   return ul;
 };
 
+const numinaContent = () => {
+  const ul = d.createElement('ul');
+  const label = d.createElement('label');
+  label.value = 'numina-type';
+  label.textContent = 'Type';
+
+  ul.appendChild(selectWidget([
+    'Sorcery', 'Psychic', 'Theurgy',
+    'Blood Affinity', 'Disciplines',
+    'Garou gifts', 'True Faith',
+  ]));
+
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+  ul.appendChild(attrWidget(''));
+
+
+  return ul;
+};
+
 const virtuesContent = (infos, souls) => {
   const ul = d.createElement('ul');
   const virtuesp = d.createElement('p');
@@ -186,7 +205,7 @@ const meritsContent = () => {
 
 const descriptionContent = () => {
   const ul = d.createElement('ul');
-  ul.style.display
+  ul.style.display;
 
   ul.appendChild(descriptionWidget());
 
@@ -311,29 +330,21 @@ const meritsWidget = () => {
 
   li.appendChild(inputText);
 
-  const selectType = d.createElement('select');
-  const options = ['Physical', 'Mental', 'Social', 'Supernatural'];
-  options.map((optionName) => {
-    const option = d.createElement('option');
-    option.value = optionName;
-    option.textContent = optionName;
+  li.appendChild(widgetSelect(['Physical', 'Mental', 'Social', 'Supernatural']));
 
-    selectType.appendChild(option);
-  });
+  li.appendChild(widgetSelect([-7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7]));
 
-  li.appendChild(selectType);
+  return li;
+};
 
-  const selectValue = d.createElement('select');
-  const numbers = [-7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7];
-  numbers.map((optionName) => {
-    const option = d.createElement('option');
-    option.value = optionName;
-    option.textContent = optionName;
+const selectWidget = (infos) => {
+  const li = d.createElement('li');
 
-    selectValue.appendChild(option);
-  });
+  const label = d.createElement('label');
+  label.textContent = 'Type';
+  li.appendChild(label);
 
-  li.appendChild(selectValue);
+  li.appendChild(widgetSelect(infos));
 
   return li;
 };
@@ -363,15 +374,27 @@ const widgetDot = (title, value) => {
     );
   });
 
+  const changeDotColor = (child, value) => {
+    if (child.value <= value) {
+      child.classList.remove('far');
+      child.classList.add('fas');
+    } else {
+      child.classList.remove('fas');
+      child.classList.add('far');
+    }
+  };
+
   return dot;
 };
 
-const changeDotColor = (child, value) => {
-  if (child.value <= value) {
-    child.classList.remove('far');
-    child.classList.add('fas');
-  } else {
-    child.classList.remove('fas');
-    child.classList.add('far');
-  }
+const widgetSelect = (items) => {
+  const selectValue = d.createElement('select');
+  items.map((optionName) => {
+    const option = d.createElement('option');
+    option.value = optionName;
+    option.textContent = optionName;
+    selectValue.appendChild(option);
+  });
+
+  return selectValue;
 };
