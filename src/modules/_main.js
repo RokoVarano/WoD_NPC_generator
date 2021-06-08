@@ -114,6 +114,7 @@ const section = (title, articles) => {
 
   const articleContainer = d.createElement('div');
   articleContainer.classList.add('article-container');
+  articleContainer.id = `${title}-article-container`;
   section.appendChild(articleContainer);
 
   articles.map( (article) => {
@@ -162,7 +163,7 @@ const numinaContent = () => {
   label.value = 'numina-type';
   label.textContent = 'Type';
 
-  ul.appendChild(selectWidget([
+  ul.appendChild(selectWidget('Type', [
     'Sorcery', 'Psychic', 'Theurgy',
     'Blood Affinity', 'Disciplines',
     'Garou gifts', 'True Faith',
@@ -405,11 +406,11 @@ const meritsWidget = () => {
   return li;
 };
 
-const selectWidget = (infos) => {
+const selectWidget = (title, infos) => {
   const li = d.createElement('li');
 
   const label = d.createElement('label');
-  label.textContent = 'Penalty';
+  label.textContent = title;
   li.appendChild(label);
 
   li.appendChild(widgetSelect(infos));
@@ -433,7 +434,7 @@ const healthWidget = () => {
   label.value = 'numina-type';
   label.textContent = 'Penalty';
 
-  li.appendChild(selectWidget([
+  li.appendChild(selectWidget('Penalty', [
     ' ', -1, -2, -3, -4, -5,
   ]));
 

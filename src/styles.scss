@@ -9,8 +9,8 @@ $primary-text-color: rgba(255, 255, 255, 0.85);
 $secondary-bg-color: rgba(238, 214, 214, 0.3);
 $secondary-h-color: #a80818;
 $secondary-p-color: #4b3335;
-$font-size-h: 2rem;
 $font-size-p: 1rem;
+$font-size-h: 2 * $font-size-p;
 $small-padding: 0.2rem;
 
 .general {
@@ -143,15 +143,4 @@ input {
 .radio-container {
   padding: 0 $small-padding;
   justify-content: space-between;
-}
-
-@media (max-width: 720px) {
-  #main_form {
-    flex-direction: column;
-  }
-
-  .side {
-    width: 100%;
-  }
-
 }
