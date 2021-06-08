@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
-$p-font: 'Quicksand', sans-serif;
-$h-font: 'Mate SC', serif;
+$p-font: 'Ubuntu', sans-serif;
+$h-font: 'Limelight', cursive;
 $primary-bg-color: #4b3335;
 $primary-text-color: rgba(255, 255, 255, 0.85);
 $secondary-bg-color: rgba(238, 214, 214, 0.3);
@@ -11,24 +11,81 @@ $secondary-h-color: #a80818;
 $secondary-p-color: #4b3335;
 $font-size-h: 2rem;
 $font-size-p: 1rem;
+$small-padding: 0.2rem;
 
-* {
+.general {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+html,
+section,
+label,
+form,
+h1,
+h3,
+p,
+div,
+ul,
+li,
+input,
+article,
+body,
+header,
+textarea,
+.virtueWidgetLi {
+  @extend .general;
+}
+
+.article-container,
+#main_form,
+li,
+.dot-line,
+.radio-container {
+  flex-direction: row;
+}
+
+h3, p, li {
+  flex: 0;
+}
+
+#li_textarea {
+  flex: 1;
+}
+
+header {
+  padding: $small-padding;
+  border-bottom: solid 2px $secondary-p-color;
+}
+
+section {
+  margin: $small-padding 0;
 }
 
 label {
   font-family: $p-font;
+  align-items: flex-start;
+}
+
+form {
+  align-items: flex-start;
+}
+
+h1, h3 {
+  font-family: $h-font;
 }
 
 h1 {
   font-size: $font-size-h;
-  font-family: $h-font;
 }
 
 h3 {
   font-size: ($font-size-h + $font-size-p)/2;
-  font-family: $h-font;
 }
 
 p {
@@ -41,10 +98,23 @@ a {
   text-decoration: none;
 }
 
-.flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ul {
+  list-style: none;
+  justify-content: flex-start;
+}
+
+li {
+  padding: $small-padding 0;
+}
+
+article {
+  border: 1px solid $primary-bg-color;
+  padding: 0 $small-padding;
+  align-items: flex-start;
+}
+
+input {
+  border: 1px $primary-bg-color solid;
 }
 
 .primary {
@@ -61,6 +131,27 @@ a {
   }
 }
 
-@import './assets/styles/navbar';
-@import './assets/styles/header';
-@import './assets/styles/main';
+.side {
+  width: 50%;
+  margin: $small-padding;
+}
+
+.article-container {
+  align-items: flex-start;
+}
+
+.radio-container {
+  padding: 0 $small-padding;
+  justify-content: space-between;
+}
+
+@media (max-width: 720px) {
+  #main_form {
+    flex-direction: column;
+  }
+
+  .side {
+    width: 100%;
+  }
+
+}

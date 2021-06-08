@@ -4,6 +4,7 @@ const d = document;
 export default function main() {
   const main = d.createElement('main');
   const form = d.createElement('form');
+  form.id = 'main_form';
   const leftSide = d.createElement('div');
   leftSide.classList.add('side');
   const rightSide = d.createElement('div');
@@ -80,12 +81,20 @@ export default function main() {
 
   const quirksInfo = section('', [meritsArticle, descriptionArticle]);
 
+  const movesArticle = article('Moves', movesContent());
+  movesArticle.classList.add('moves');
+  const armorArticle = article('Armor', infoContent(['Name', 'Class', 'Rating', 'Penalty']));
+  const healthArticle = article('Health', healthContent(7));
+
+  const combatInfo = section('Combat', [movesArticle, armorArticle, healthArticle]);
+
   main.appendChild(form);
   form.appendChild(leftSide);
   form.appendChild(rightSide);
   leftSide.appendChild(generalInfo);
   leftSide.appendChild(attrInfo);
   leftSide.appendChild(abbInfo);
+  leftSide.appendChild(combatInfo);
   rightSide.appendChild(advantagesInfo);
   rightSide.appendChild(quirksInfo);
 
@@ -208,6 +217,65 @@ const descriptionContent = () => {
   ul.style.display;
 
   ul.appendChild(descriptionWidget());
+
+  return ul;
+};
+
+const movesContent = () => {
+  const table = d.createElement('table');
+  const trHeader = d.createElement('tr');
+
+  const headerNames = ['Weapon/attack', 'Diff', 'Damage', 'Range', 'Rate', 'Clip', 'Conceal'];
+  headerNames.map((item) => {
+    const headerCell = d.createElement('th');
+    headerCell.textContent = item;
+    trHeader.appendChild(headerCell);
+  });
+
+  table.appendChild(trHeader);
+
+  const createTR = () => {
+    const tr = d.createElement('tr');
+    const nameTd = createTd('text');
+    tr.appendChild(nameTd);
+    tr.appendChild(createTd('text'));
+    tr.appendChild(createTd('text'));
+    tr.appendChild(createTd('text'));
+    tr.appendChild(createTd('text'));
+    tr.appendChild(createTd('text'));
+    tr.appendChild(createTd('text'));
+
+
+    return tr;
+  };
+
+  const createTd = (type) => {
+    const td = d.createElement('td');
+    const input = d.createElement('input');
+    input.type = type;
+    input.style.width = '100%';
+    td.appendChild(input);
+
+    return td;
+  };
+
+  table.appendChild(createTR());
+  table.appendChild(createTR());
+  table.appendChild(createTR());
+  table.appendChild(createTR());
+  table.appendChild(createTR());
+  table.appendChild(createTR());
+
+  return table;
+};
+
+const healthContent = (maxHealth) => {
+  const ul = d.createElement('ul');
+
+  while (maxHealth > 0) {
+    ul.appendChild(healthWidget());
+    maxHealth --;
+  }
 
   return ul;
 };
@@ -341,7 +409,7 @@ const selectWidget = (infos) => {
   const li = d.createElement('li');
 
   const label = d.createElement('label');
-  label.textContent = 'Type';
+  label.textContent = 'Penalty';
   li.appendChild(label);
 
   li.appendChild(widgetSelect(infos));
@@ -351,9 +419,23 @@ const selectWidget = (infos) => {
 
 const descriptionWidget = () => {
   const li = d.createElement('li');
+  li.id = 'li_textarea';
   const textArea = d.createElement('textarea');
   textArea.name = 'description';
   li.appendChild(textArea);
+
+  return li;
+};
+
+const healthWidget = () => {
+  const li = d.createElement('li');
+  const label = d.createElement('label');
+  label.value = 'numina-type';
+  label.textContent = 'Penalty';
+
+  li.appendChild(selectWidget([
+    ' ', -1, -2, -3, -4, -5,
+  ]));
 
   return li;
 };
