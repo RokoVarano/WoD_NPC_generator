@@ -1,6 +1,6 @@
 import './styles.scss';
-import header from './modules/_header';
-import main from './modules/_main';
+import header from './modules/frontend/_header';
+import main from './modules/frontend/_mortal';
 
 const d = document;
 
