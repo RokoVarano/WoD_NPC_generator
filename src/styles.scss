@@ -38,7 +38,8 @@ article,
 body,
 header,
 textarea,
-.virtueWidgetLi {
+.virtueWidgetLi
+.number-attr {
   @extend .general;
 }
 
@@ -140,7 +141,6 @@ input {
   align-items: flex-start;
 }
 
-.radio-container {
-  padding: 0 $small-padding;
-  justify-content: space-between;
+.number-attr {
+  width: 2rem;
 }

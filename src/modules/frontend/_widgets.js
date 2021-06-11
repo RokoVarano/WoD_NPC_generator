@@ -32,16 +32,7 @@ const attrWidget = (title) => {
     li.appendChild(widgetLabel(title));
   }
 
-  const radioContainer = d.createElement('div');
-  radioContainer.classList.add('radio-container');
-
-  radioContainer.appendChild(widgetDot(title, 1));
-  radioContainer.appendChild(widgetDot(title, 2));
-  radioContainer.appendChild(widgetDot(title, 3));
-  radioContainer.appendChild(widgetDot(title, 4));
-  radioContainer.appendChild(widgetDot(title, 5));
-
-  li.appendChild(radioContainer);
+  li.appendChild(widgetNumber());
 
   return li;
 };
@@ -62,39 +53,20 @@ const soulWidget = (title) => {
     li.appendChild(widgetLabel(title));
   }
 
-  const radioContainer = d.createElement('div');
-  radioContainer.classList.add('radio-container-soul');
+  const soulContainer = d.createElement('div');
 
   const permanentline = d.createElement('div');
   permanentline.classList.add('dot-line');
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 1));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 2));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 3));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 4));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 5));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 6));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 7));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 8));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 9));
-  permanentline.appendChild(widgetDot(`${title}-permanent`, 10));
+  permanentline.appendChild(widgetNumber());
 
   const templine = d.createElement('div');
   templine.classList.add('dot-line');
-  templine.appendChild(widgetDot(`${title}-temp`, 1));
-  templine.appendChild(widgetDot(`${title}-temp`, 2));
-  templine.appendChild(widgetDot(`${title}-temp`, 3));
-  templine.appendChild(widgetDot(`${title}-temp`, 4));
-  templine.appendChild(widgetDot(`${title}-temp`, 5));
-  templine.appendChild(widgetDot(`${title}-temp`, 6));
-  templine.appendChild(widgetDot(`${title}-temp`, 7));
-  templine.appendChild(widgetDot(`${title}-temp`, 8));
-  templine.appendChild(widgetDot(`${title}-temp`, 9));
-  templine.appendChild(widgetDot(`${title}-temp`, 10));
+  templine.appendChild(widgetNumber());
 
-  radioContainer.appendChild(permanentline);
-  radioContainer.appendChild(templine);
+  soulContainer.appendChild(permanentline);
+  soulContainer.appendChild(templine);
 
-  li.appendChild(radioContainer);
+  li.appendChild(soulContainer);
 
   return li;
 };
@@ -147,32 +119,32 @@ const healthWidget = () => {
 
 // widget componenents
 
-const widgetDot = (title, value) => {
-  const dot = d.createElement('i');
-  dot.classList.add('far', 'fa-circle');
-  dot.name = title;
-  dot.value = value;
+// const widgetDot = (title, value) => {
+//   const dot = d.createElement('i');
+//   dot.classList.add('far', 'fa-circle');
+//   dot.name = title;
+//   dot.value = value;
 
-  dot.addEventListener('click', () => {
-    const children = [...dot.parentNode.children];
+//   dot.addEventListener('click', () => {
+//     const children = [...dot.parentNode.children];
 
-    children.map(
-        (child) => changeDotColor(child, dot.value),
-    );
-  });
+//     children.map(
+//         (child) => changeDotColor(child, dot.value),
+//     );
+//   });
 
-  const changeDotColor = (child, value) => {
-    if (child.value <= value) {
-      child.classList.remove('far');
-      child.classList.add('fas');
-    } else {
-      child.classList.remove('fas');
-      child.classList.add('far');
-    };
-  };
+//   const changeDotColor = (child, value) => {
+//     if (child.value <= value) {
+//       child.classList.remove('far');
+//       child.classList.add('fas');
+//     } else {
+//       child.classList.remove('fas');
+//       child.classList.add('far');
+//     };
+//   };
 
-  return dot;
-};
+//   return dot;
+// };
 
 const widgetSelect = (items) => {
   const selectValue = d.createElement('select');
@@ -192,6 +164,14 @@ const widgetLabel = (title) => {
   label.textContent = title;
 
   return label;
+};
+
+const widgetNumber = () => {
+  const selectValue = d.createElement('input');
+  selectValue.type = 'number';
+  selectValue.classList.add('number-attr');
+
+  return selectValue;
 };
 
 export {nameWidget, attrWidget, soulWidget, healthWidget, meritsWidget, descriptionWidget, selectWidget};
